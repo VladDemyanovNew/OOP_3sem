@@ -7,56 +7,33 @@ namespace OOP_Lab2
     {
         static void Main(string[] args)
         {
-            //Student st1 = new Student();
-            //Student st2 = new Student();
-            //Student.DisplayId();
-            //Person pers1 = new Person();
-            //pers1.Move();
-            //pers1.Say();
-            //Human human1 = new Human();
-            //human1.Name = "Vlad";
-            //human1.Age = 18;
-            //Console.WriteLine($"\t{human1.ToString()}");
-            //Human human2 = new Human();
-            //Human human3 = new Human();
-            //Console.WriteLine($"\t{human2.Equals(human3)}");
+            Person pers1 = new Person();                                        //partial class
+            pers1.Move();
+            pers1.Say();
 
-            //Массив объектов
-            Student[] students = Student.createStudents(5);
+            Console.WriteLine($"\tЗакрытый конструктор: {PI.pi}");
+            Student[] students = Student.createStudents(5);                     //массив объектов
             Student.autoFill(ref students);
-            Student.displayStudentsByFaculty(students, "faculty0");
+            Student.displayStudentsByFaculty(students, "faculty0");             //список студентов заданного факультета
+            Student.displayStudentsByGroup(students, 3);                        //список учебной группы
+            Student stud1 = new Student("Surname1", "Name1");
+            Console.WriteLine($"\n\tВозраст {stud1.Name}: {stud1.getAge()}");   //вывод расчёта возраста студента
+            Student.DisplayId();                                                //вывод количества созданных объектов Student
+            Console.WriteLine($"\n\t#{stud1.ID}");
+            Console.WriteLine($"\t{stud1.ToString()}");                         //override ToString
+            Student ex1 = new Student();
+            Student ex2 = new Student();
+            Console.WriteLine($"\t#{ex1.GetHashCode()}");
+            Console.WriteLine($"\t#{ex2.GetHashCode()}");
+            Console.WriteLine($"\tСравнение: {ex1.Equals(ex2)}");
         }
         
     }
-
-    class PI
+    class PI //класс с закрытым конструктором
     {
         //не допускает создание объектов
         private PI() { }
         public static double pi = Math.PI;
-    }
-    public class Human
-    {
-        public string Name { get; set; }
-        public int Age { get; set; } = 1;
-        public override string ToString()
-        {
-            return "Type: " + base.ToString() + " " + Name + " " + Age;
-        }
-        public override bool Equals(object obj)
-        {
-            if (obj == null) return false;
-            if (obj.GetType() != this.GetType()) return false;
-            Human human = (Human)obj;
-            return (this.Name == human.Name && this.Age == human.Age);
-        }
-        public override int GetHashCode()
-        {
-            int hash = 269;
-            hash = string.IsNullOrEmpty(Name) ? 0 : Name.GetHashCode();
-            hash = (hash * 47) + Age.GetHashCode();
-            return hash;
-        }
     }
     class Student
     {
@@ -65,14 +42,14 @@ namespace OOP_Lab2
         private string name;
         public string midName { get; set; }
         public DateTime birthday { get; set; }
-        public string address { get; }
+        public string address { get; set; }
         public string phoneNumber { get; set; }
         public string faculty { get; set; }
         public int course { get; set; }
         public int group { get; set; }
-        public readonly string forRead = "\tТолько для чтения"; //также можно инициализировать в конструктуре
-        public const string gender = "Male";
-        public readonly int ID;
+        public const int SIZE = 99;
+        public readonly int ID;                    //также можно инициализировать в конструктуре
+        public static int Counter { get; }
         public string Surname
         {
             get
@@ -94,34 +71,72 @@ namespace OOP_Lab2
             {
                 name = value;
             }
-        }
-
-        //Статический конструктор
-        //static Student()
-        //{
-        //    counter = 0;
-        //    Console.WriteLine("\tStatic constructor");
-        //}
-        public Student(string address)
+        }  
+        static Student()    //Статический конструктор
         {
-            this.address = address;
+            counter = 0;
+            Console.WriteLine("\tStatic constructor");
+        }
+        public Student()
+        {
+            this.ID = this.GetHashCode();
             counter++;
         }
-        public Student(string address = "Minsk", string phoneNumber = "11111")
+        public Student(string surname, string name, int group = 3)
         {
-            this.address = address;
-            this.phoneNumber = phoneNumber;
+            this.Surname = surname;
+            this.Name = name;
+            this.group = group;
+            this.ID = this.GetHashCode();
             counter++;
         }
-
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            if (obj.GetType() != this.GetType()) return false;
+            Student student = (Student)obj;
+            return this.GetHashCode() == student.GetHashCode();
+        }
+        public override int GetHashCode()
+        {
+            int hash = 269;
+            System.Reflection.PropertyInfo[] properties = this.GetType().GetProperties();
+            for (int i = 0; i < properties.Length; i++)
+            {
+                if (properties[i].PropertyType == "asd".GetType())
+                {
+                    hash += string.IsNullOrEmpty(Convert.ToString(properties[i].GetValue(this, null))) ? 0 : properties[i].GetHashCode();
+                }
+                hash = hash * 47 + properties[i].GetHashCode();
+            }
+            return hash;
+        }
+        public override string ToString()
+        {
+            System.Reflection.PropertyInfo[] properties = this.GetType().GetProperties();
+            string result = "Type: " + base.ToString();
+            foreach (var value in properties)
+            {
+                result += " " + value.GetValue(this, null);
+            }
+           
+            return result;
+        }
         public int getAge()
         {
             if (this.birthday == new DateTime())
             {
-                Console.Write("\tВведите дату рождения: ");
-                this.birthday = DateTime.ParseExact(Console.ReadLine(),
-                    "yyyy/MM/dd",
-                    System.Globalization.CultureInfo.InvariantCulture);
+                Console.Write("\tВведите дату рождения yyyy/MM/dd: ");
+                string dateString = Console.ReadLine();
+                DateTime userDate;
+                var userCulture = System.Globalization.CultureInfo.InvariantCulture;
+                if (DateTime.TryParse(dateString, userCulture.DateTimeFormat, System.Globalization.DateTimeStyles.None, out userDate))
+                {
+                    Console.WriteLine("\tValid date entered (long date format):" + userDate.ToLongDateString());
+                    this.birthday = userDate;
+                }    
+                else
+                    Console.WriteLine("\tВы ввели дату не в том формате!");
             }
             return DateTime.Now.Year - this.birthday.Year;
         }
@@ -139,24 +154,40 @@ namespace OOP_Lab2
             for (int i = 0; i < students.Length; i++)
             {
                 if (i <= students.Length / 2)
+                {
                     students[i].faculty = "faculty" + 0;
+                    students[i].group = 3;
+                }   
                 else
+                {
                     students[i].faculty = "faculty" + i;
+                    students[i].group = i;
+                }     
                 students[i].Name = "studentName" + i;
-                students[i].Surname = "studentSurname" + i;
+                students[i].Surname = "studentSurname" + i;       
             }
         }
         public static void displayStudentsByFaculty(Student[] students, string faculty)
         {
-            foreach (Student student in students)
+            Console.WriteLine($"\n\tВывод студенов факультета {faculty}");
+            foreach (var student in students)
             {
                 if (student.faculty == faculty)
                     Console.WriteLine($"\t{student.Surname} {student.Name} {student.faculty}");
             }
         }
+        public static void displayStudentsByGroup(Student[] students, int group)
+        {
+            Console.WriteLine($"\n\tВывод студенов {group}-й группы");
+            foreach (var student in students)
+            {
+                if (student.group == group)
+                    Console.WriteLine($"\t{student.Surname} {student.Name} {student.group}");
+            }
+        }
         public static void DisplayId()
         {
-            Console.WriteLine($"\tСоздано {counter} объектов.");
+            Console.WriteLine($"\n\tСоздано {counter} объектов.");
         }
     }
 }
