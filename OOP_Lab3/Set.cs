@@ -97,7 +97,7 @@ namespace OOP_Lab3
             return result;
         }
 
-        public static explicit operator int (Set element)
+        public static explicit operator int (Set element)   //  implicit - неявное, будем использовать = для преобразования
         {
             return element.array.Count;
         }

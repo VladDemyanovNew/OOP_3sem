@@ -10,7 +10,6 @@ namespace OOP_Lab2
             Person pers1 = new Person();                                        //partial class
             pers1.Move();
             pers1.Say();
-
             Console.WriteLine($"\tЗакрытый конструктор: {PI.pi}");
             Student[] students = Student.createStudents(5);                     //массив объектов
             Student.autoFill(ref students);
