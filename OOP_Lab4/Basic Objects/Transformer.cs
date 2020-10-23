@@ -23,5 +23,10 @@ namespace OOP_Lab4
         {
             Console.WriteLine("I'm a transformer being!");
         }
+
+        public override bool DoClone()
+        {
+            return true;
+        }
     }
 }

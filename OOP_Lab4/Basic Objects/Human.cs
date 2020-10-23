@@ -20,5 +20,25 @@ namespace OOP_Lab4
         {
             Console.WriteLine("I'm a human being!");
         }
+
+        // for exercize
+        public bool DoClone()
+        {
+            return true;
+        }
+
+        // Переопределнный ToString()
+        public override string ToString()
+        {
+            System.Reflection.PropertyInfo[] properties = this.GetType().GetProperties();
+            string result = "Type: " + base.ToString();
+            foreach (var value in properties)
+            {
+                result += " " + value.GetValue(this, null);
+            }
+
+            return result;
+        }
     }
 }
+

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OOP_Lab4
 {
-    class Car : Vehicle
+    sealed class Car : Vehicle  // sealed значит что от этого класса нельзя наследовать
     {
         // Свойства
         public IEngine Engine { get; set; }
@@ -26,5 +26,16 @@ namespace OOP_Lab4
         {
             return this.Weight / 2;
         }
+
+        // for exercize
+        public override bool DoClone()
+        {
+            return true;
+        }
     }
+
+    //class testSealed : Car    Ошибка - класс Car запечатаный
+    //{
+
+    //}
 }

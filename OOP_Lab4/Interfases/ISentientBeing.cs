@@ -8,6 +8,6 @@ namespace OOP_Lab4
     {
         int IQ { get; }
         void Say();
-        
+        bool DoClone();
     }
 }
