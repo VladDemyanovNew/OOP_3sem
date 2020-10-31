@@ -8,8 +8,11 @@ namespace OOP_Lab4
         static void Main(string[] args)
         {
             Car car = new Car(1000, 270);
-            Transformer transformer = new Transformer(3000, 120, 100);
-            Human human = new Human(180);
+            Transformer transformer = new Transformer(3000, 120, 100, 100, "transformer1", 2002);
+            Transformer transformer1 = new Transformer(3000, 120, 100, 100, "transformer2", 2004);
+            Transformer transformer2 = new Transformer(3000, 120, 100, 1000, "transformer3", 2008);
+            Human human = new Human(180, 2002, "human1");
+            Human human1 = new Human(180, 2008, "human2");
 
             car.Engine = new CarControl(300);
             transformer.Engine = new TransformerControl(600);
@@ -71,7 +74,23 @@ namespace OOP_Lab4
             {
                 outputObjects.IAmPrinting(item);
             }
-           
+
+            // Лабораторная работа №6
+            Console.WriteLine($"\n\n-------Лабораторная работа №6-------");
+            Army army = new Army();
+            army.Add(human, transformer, transformer1, transformer2, human1);
+            army.PrintList();
+
+            Console.WriteLine($"\n\tВывод элементов по году.");
+            Army result = ArmyController.findElementByYear(army, 2002);
+            result.PrintList();
+
+            Console.WriteLine($"\n\tВывод трансформеров по мощности.");
+            result = ArmyController.findTransformersByPower(army, 100);
+            result.PrintList();
+
+            Console.WriteLine($"\n\tКолличество боевых единииц в армии: {ArmyController.sizeOfArmy(army)}");
+            
         }
     }
 }

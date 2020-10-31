@@ -8,11 +8,15 @@ namespace OOP_Lab4
     {
         // Свойства
         public int IQ { get; }
+        public int Year { get; set; }
+        public string Name { get; }
 
         // Конструкторы
-        public Human(int IQ)
+        public Human(int IQ, int year, string name)
         {
             this.IQ = IQ;
+            this.Name = name;
+            this.Year = year;
         }
 
         // Методы
