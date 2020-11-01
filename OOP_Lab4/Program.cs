@@ -7,7 +7,7 @@ namespace OOP_Lab4
     {
         static void Main(string[] args)
         {
-            Car car = new Car(1000, 270);
+            Car car = new Car(1000, 270, Car.Color.Red);
             Transformer transformer = new Transformer(3000, 120, 100, 100, "transformer1", 2002);
             Transformer transformer1 = new Transformer(3000, 120, 100, 100, "transformer2", 2004);
             Transformer transformer2 = new Transformer(3000, 120, 100, 1000, "transformer3", 2008);
@@ -27,14 +27,14 @@ namespace OOP_Lab4
             human.Say();
 
             // Апкаст и полиморфизм
-            Vehicle carTest = new Car(300, 300);
+            Vehicle carTest = new Car(300, 300, Car.Color.Red);
             Console.WriteLine($"Без virtual и override: {carTest.calculateRate()}");    // Без полиморфизма подтипов
             Console.WriteLine($"С virtual и override: {carTest.calculateRate2()}");     // С полиморфизмом подтипов
 
             Console.WriteLine(transformer.DoClone());
 
             // Способы преобразований
-            Car test = new Car(1, 2);
+            Car test = new Car(1, 2, Car.Color.Red);
             Vehicle vehicle = test as Vehicle;
             if (vehicle == null)
             {
@@ -45,7 +45,7 @@ namespace OOP_Lab4
                 Console.WriteLine(vehicle.DoClone());
             }
 
-            Car t = new Car(2, 3);
+            Car t = new Car(2, 3, Car.Color.Red);
             if (t is Vehicle)
             {
                 Vehicle tt = (Vehicle)t;
@@ -90,7 +90,17 @@ namespace OOP_Lab4
             result.PrintList();
 
             Console.WriteLine($"\n\tКолличество боевых единииц в армии: {ArmyController.sizeOfArmy(army)}");
-            
+
+            // Дополнительные задания
+            Console.WriteLine($"\n\tСчитывающий данные из текстового файла в коллекцию.");
+            army = ArmyController.fillArmyFromTXT(@"D:\Study\OOP\OOP_Lab1\OOP_Lab4\resources\Army.txt", army);
+            army.PrintList();
+
+            Console.WriteLine($"\n\tСчитывающий данные из JSON файла в коллекцию.");
+            army = ArmyController.fillArmyFromJSON(@"D:\Study\OOP\OOP_Lab1\OOP_Lab4\resources\Army.json", army);
+            army.PrintList();
+
+            Console.ReadKey();
         }
     }
 }

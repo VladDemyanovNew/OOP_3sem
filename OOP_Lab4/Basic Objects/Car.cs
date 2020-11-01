@@ -9,11 +9,21 @@ namespace OOP_Lab4
         // Свойства
         public IEngine Engine { get; set; }
 
+        public Color carColor { get; set; }
+        public enum Color
+        {
+            Red = 1,
+            White,
+            Black,
+            Orange
+        }
+
         // Конструкторы
-        public Car(int Weight, int MaxSpeed)
+        public Car(int Weight, int MaxSpeed, Color color)
         {
             this.MaxSpeed = MaxSpeed;
             this.Weight = Weight;
+            this.carColor = color;
         }
 
         // Методы

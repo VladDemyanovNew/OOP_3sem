@@ -7,9 +7,9 @@ namespace OOP_Lab4
     class Human : ISentientBeing
     {
         // Свойства
-        public int IQ { get; }
+        public int IQ { get; set; }
         public int Year { get; set; }
-        public string Name { get; }
+        public string Name { get; set; }
 
         // Конструкторы
         public Human(int IQ, int year, string name)
@@ -17,6 +17,13 @@ namespace OOP_Lab4
             this.IQ = IQ;
             this.Name = name;
             this.Year = year;
+        }
+
+        public Human()
+        {
+            this.IQ = -1;
+            this.Name = "";
+            this.Year = -1;
         }
 
         // Методы

@@ -1,0 +1,2 @@
+﻿Human 100 Alex 1990
+Transformer 200 OptimusPrime 2000 200 1000 700
