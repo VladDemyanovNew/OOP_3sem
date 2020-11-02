@@ -1,0 +1,15 @@
+﻿[
+  {
+    "IQ": 400,
+    "Year": 2020,
+    "Name": "TransformerJSON",
+    "Power": 3000,
+    "MaxSpeed": 250,
+    "Weight": 3000
+  },
+  {
+    "IQ": 100,
+    "Year": 2020,
+    "Name": "HumanJSON"
+  }
+]
