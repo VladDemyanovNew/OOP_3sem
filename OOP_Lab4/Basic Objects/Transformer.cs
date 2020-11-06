@@ -26,12 +26,12 @@ namespace OOP_Lab4
 
         public Transformer()
         {
-            this.MaxSpeed =-1;
-            this.Weight = -1;
-            this.IQ = -1;
-            this.Year = -1;
+            this.MaxSpeed = 0;
+            this.Weight = 0;
+            this.IQ = 0;
+            this.Year = 0;
             this.Name = "";
-            this.Power = -1;
+            this.Power = 0;
         }
 
         // Методы

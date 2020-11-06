@@ -1,6 +1,7 @@
-﻿using System;
+﻿
+using NUnit.Framework;
+using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace OOP_Lab4
 {
@@ -45,6 +46,7 @@ namespace OOP_Lab4
         // Методы 
         public void Delete(int index)
         {
+            Assert.IsTrue(index >= 0);
             armyList.RemoveAt(index);
         }
         

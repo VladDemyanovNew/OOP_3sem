@@ -17,13 +17,17 @@ namespace OOP_Lab4
             this.IQ = IQ;
             this.Name = name;
             this.Year = year;
+            if (year < 0)
+            {
+                throw new HumanException("Год не может быть отрицательным.", 22);
+            }
         }
 
         public Human()
         {
-            this.IQ = -1;
+            this.IQ = 0;
             this.Name = "";
-            this.Year = -1;
+            this.Year = 0;
         }
 
         // Методы
