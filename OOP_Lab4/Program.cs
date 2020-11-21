@@ -141,6 +141,7 @@ namespace OOP_Lab4
                 Console.WriteLine($"Произошла ошибка: { ex.Message}; с кодом: {ex.ErrorCode}");
                 Logger.FileLogger($"Произошла ошибка: { ex.Message}; с кодом: {ex.ErrorCode}", @"log.txt");
                 ex.ExceptionHandler();
+                
             }
             catch (Exception ex)
             {

@@ -12,6 +12,7 @@ namespace OOP_Lab4
         public static Army findElementByYear(Army army, int year)
         {
             Army result = new Army();
+            
             foreach (ISentientBeing item in army.armyList)
             {
                 if (item.Year == year)
@@ -22,15 +23,13 @@ namespace OOP_Lab4
                 Console.WriteLine($"\tСписок пуст.");
                 return null;
             }
-            else
-            {
-                return result;
-            }
+            return result;
         }
 
         public static Army findTransformersByPower(Army army, int power)
         {
             Army result = new Army();
+            
             foreach (ISentientBeing item in army.armyList)
             {
                 if (item is Transformer && ((Transformer)item).Power == power)
@@ -43,10 +42,7 @@ namespace OOP_Lab4
                 Console.WriteLine($"\tСписок пуст.");
                 return null;
             }
-            else
-            {
-                return result;
-            }
+            return result;
         }
 
         public static int sizeOfArmy(Army army)
