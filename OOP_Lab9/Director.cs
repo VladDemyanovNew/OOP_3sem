@@ -6,45 +6,48 @@ namespace OOP_Lab9
 {
     class Director
     {
-        public delegate void DirectorHandler(object sender, DirectorEventArgs e);
-        public event DirectorHandler SalaryEvent;
-        public void AddFail(Worker w)
+        public void Penalize(Worker sender, WorkerEventArgs e)
         {
-            w.FailsCount++;
-            if (w.FailsCount == 3)
-            {
-                w.FailsCount = 0;
-                Penalize(w, 300);
-            }
-        }
+            int penalty = 0;
+            if (sender is Developer)
+                penalty = 600;
+            if (sender is Accountant)
+                penalty = 300;
 
-        public void AddSuccess(Worker w)
-        {
-            w.SuccessCount++;
-            if (w.SuccessCount == 3)
-            {
-                w.SuccessCount = 0;
-                IncreaseSalaries(w, 300);
-            }
-        }
-
-        public void Penalize(Worker w, int penalty)
-        {
-            int salary = w.Salary;
+            int salary = e.Salary;
             if (salary - penalty >= 300)
             {
                 salary -= penalty;
-                w.SetSalary(salary);
-                SalaryEvent?.Invoke(this, new DirectorEventArgs($"Вы оштрафованы на {penalty}.", penalty));
+                sender.SetSalary(salary);
+                e.SalaryOperation = penalty;
             }
+            e.SalaryOperation = penalty;
         }
 
-        public void IncreaseSalaries(Worker w, int prize)
+        public void IncreaseSalaries(Worker sender, WorkerEventArgs e)
         {
-            int salary = w.Salary;
+            int prize = 0;
+            if (sender is Developer)
+                prize = 1000;
+            if (sender is Accountant)
+                prize = 500;
+
+            int salary = e.Salary;
             salary += prize;
-            w.SetSalary(salary);
-            SalaryEvent?.Invoke(this, new DirectorEventArgs($"Вам начислена премия {prize}.", prize));
+            sender.SetSalary(salary);
+            e.SalaryOperation = prize;
         }
+
+        public void SalaryInfo(Worker sender, WorkerEventArgs e)
+        {
+            Console.WriteLine("\n");
+            Console.WriteLine($"Имя: {sender.Name}");
+            Console.WriteLine(e.Message);
+            Console.WriteLine($"Первоначальная зарплата: {e.StartingSalary}");
+            Console.WriteLine($"Транзакция: {e.SalaryOperation}");
+            Console.WriteLine($"Текущая зарплата: {sender.Salary}");
+            Console.WriteLine("\n");
+        }
+
     }
 }

@@ -6,6 +6,6 @@ namespace OOP_Lab9
 {
     class Accountant : Worker
     {
-        public Accountant(int salary) : base(salary) { }
+        public Accountant(int salary, string name) : base(salary, name) { }
     }
 }

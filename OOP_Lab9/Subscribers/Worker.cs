@@ -6,14 +6,19 @@ namespace OOP_Lab9
 {
     class Worker
     {
+        public delegate void WorkerHandler(Worker sender, WorkerEventArgs e);
+        public event WorkerHandler PenalizeEvent;
+        public event WorkerHandler IncreaseEvent;
         public int Salary { get; private set; }
         public int FailsCount { get; set; }
         public int SuccessCount { get; set; }
         public int StartingSalary { get; private set; }
-        public Worker (int salary)
+        public string Name { get; }
+        public Worker (int salary, string name)
         {
             Salary = salary;
             StartingSalary = salary;
+            Name = name;
         }
 
         public void SetSalary(int salary)
@@ -21,12 +26,24 @@ namespace OOP_Lab9
             Salary = salary;
         }
 
-        public void SalaryInfo(object sender, DirectorEventArgs e)
+        public void AddFail()
         {
-            Console.WriteLine(e.Message);
-            Console.WriteLine($"Первоначальная зарплата: {StartingSalary}");
-            Console.WriteLine($"Транзакция: {e.SalaryOperation}");
-            Console.WriteLine($"Текущая зарплата: {Salary}");
+            FailsCount++;
+            if (FailsCount == 3)
+            {
+                FailsCount = 0;
+                PenalizeEvent?.Invoke(this, new WorkerEventArgs($"Вы оштрафованы!", Salary, StartingSalary));
+            }
+        }
+
+        public void AddSuccess()
+        {
+            SuccessCount++;
+            if (SuccessCount == 3)
+            {
+                SuccessCount = 0;
+                IncreaseEvent?.Invoke(this, new WorkerEventArgs($"Вам начислена премия!", Salary, StartingSalary));
+            }
         }
     }
 }
