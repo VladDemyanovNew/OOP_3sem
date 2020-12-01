@@ -15,18 +15,18 @@ namespace OOP_Lab10
             _products = list;
         }
 
-        public bool MoveNext()
+        public bool MoveNext()  // перемещение на одну позицию вперёд в контеёнере элементов
         {
             position++;
             return (position < _products.Count);
         }
 
-        public void Reset()
+        public void Reset() // перемещение в начало контейнера
         {
             position = -1;
         }
 
-        public object Current
+        public object Current   // текущий элемент в контейнере
         {
             get
             {

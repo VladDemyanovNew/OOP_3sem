@@ -188,7 +188,7 @@ namespace OOP_Lab10
                 return _products.SyncRoot;
             }
         }
-        IEnumerator IEnumerable.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator() // метод интерфейса IEnumerable возвращает ссылку на перечеслитель
         {
             return new ProductEnum(_products);
         }
