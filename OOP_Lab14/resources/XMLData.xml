@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ArrayOfCar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Car>
+    <Weight>9000</Weight>
+    <MaxSpeed>200</MaxSpeed>
+  </Car>
+  <Car>
+    <Weight>12000</Weight>
+    <MaxSpeed>500</MaxSpeed>
+  </Car>
+  <Car>
+    <Weight>9000</Weight>
+    <MaxSpeed>650</MaxSpeed>
+  </Car>
+</ArrayOfCar>

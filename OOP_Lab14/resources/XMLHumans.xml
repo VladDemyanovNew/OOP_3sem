@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<humans>
+  <human name="Vlad">
+    <surname>Demyanov</surname>
+    <age>18</age>
+  </human>
+  <human name="Alex">
+    <surname>Smirnov</surname>
+    <age>13</age>
+  </human>
+  <human name="Alex">
+    <surname>Mario</surname>
+    <age>19</age>
+  </human>
+  <human name="Zac">
+    <surname>Anderson</surname>
+    <age>21</age>
+  </human>
+</humans>
