@@ -1,0 +1,17 @@
+Name: OOP_Lab15
+Base Directory: F:\HDD\OOP_3sem\OOP_3sem\OOP_Lab15\bin\Debug\netcoreapp3.1\
+
+System.Private.CoreLib
+OOP_Lab15
+System.Runtime
+System.Threading.Thread
+System.Threading.Timer
+System.Console
+System.Runtime.Extensions
+System.Diagnostics.Process
+System.ComponentModel.Primitives
+System.Memory
+Microsoft.Win32.Primitives
+System.Threading
+System.Collections
+System.Runtime.InteropServices
